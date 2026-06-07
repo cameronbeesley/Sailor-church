@@ -57,7 +57,7 @@ ROOT_URLCONF = 'sailor_church.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,3 +118,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Redirect to the homepage after successful login
+LOGIN_REDIRECT_URL = 'pages.index'
+
+# Redirect to the homepage after logging out
+LOGOUT_REDIRECT_URL = 'pages.index'
