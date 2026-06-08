@@ -120,7 +120,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 # Redirect to the homepage after successful login
-LOGIN_REDIRECT_URL = 'pages.index'
+LOGIN_REDIRECT_URL = 'pages:index'
 
 # Redirect to the homepage after logging out
-LOGOUT_REDIRECT_URL = 'pages.index'
+LOGOUT_REDIRECT_URL = 'pages:index'
