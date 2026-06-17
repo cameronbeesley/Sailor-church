@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'pages',
     'community',
     'connect',
+    'phonenumber_field',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -119,8 +120,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Custom user model
+AUTH_USER_MODEL = 'pages.CustomUser'
+
 # Redirect to the homepage after successful login
 LOGIN_REDIRECT_URL = 'pages:index'
 
 # Redirect to the homepage after logging out
 LOGOUT_REDIRECT_URL = 'pages:index'
+
+PHONENUMBER_DEFAULT_REGION = 'US'

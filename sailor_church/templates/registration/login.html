@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title%}
+    Signup
+{% endblock%}
+
+{% block content%}
+
+<h2>Sailor Community Login</h2>
+
+<form method="post">
+    {% csrf_token %} 
+    
+    {{ form.as_p }} 
+    
+    <button type="submit">Log In</button>
+</form>
+
+<p>Don't have an account? <a href="{% url 'pages:signup' %}">Sign up here</a></p>
+
+{% endblock %}
