@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.conf import settings
 from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
@@ -37,3 +38,17 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return f"{self.first_name} {self.surname}: {self.email}"
+    
+class ConnectGroup(models.Model): 
+    name = models.CharField(max_length=50)
+    members = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        through = 'Membership',
+        related_name = 'joined_groups',
+    )
+
+class Membership(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    connect_group = models.ForeignKey(ConnectGroup, on_delete=models.CASCADE)
+    is_leader = models.BooleanField(default=False)
+    date_joined = models.DateField(auto_now_add=True)
