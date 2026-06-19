@@ -30,6 +30,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField('Email Adress', unique=True)
     surname = models.CharField(max_length=50)
     phone_number = PhoneNumberField(blank=True, region=None)
+    date_joined = models.DateField(auto_now_add=True)
 
     objects = CustomUserManager()
 
