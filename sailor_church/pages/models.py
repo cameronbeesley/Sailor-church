@@ -48,6 +48,9 @@ class ConnectGroup(models.Model):
         related_name = 'joined_groups',
     )
 
+    def __str__(self):
+        return self.name
+
 class Membership(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     connect_group = models.ForeignKey(ConnectGroup, on_delete=models.CASCADE)

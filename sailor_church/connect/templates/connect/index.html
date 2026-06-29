@@ -7,4 +7,16 @@
 {% block content %}
     <h1>Connect</h1>
 
+    {% if groups.count == 0 %}
+        Would you like to join a group?
+
+    {% else %}
+        Your Groups:
+        <ol>
+        {% for group in groups %}
+            <li>{{ group }}</li>
+        {% endfor %}
+        </ol> 
+    {% endif %}
+    
 {% endblock %}
