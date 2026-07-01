@@ -8,7 +8,8 @@
     <h1>Connect</h1>
 
     {% if groups.count == 0 %}
-        Would you like to join a group?
+        You are not in a group?
+        <a href="{% url 'connect:join' %}">Join a Group</a>
 
     {% else %}
         Your Groups:
