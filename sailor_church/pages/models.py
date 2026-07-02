@@ -56,3 +56,50 @@ class Membership(models.Model):
     connect_group = models.ForeignKey(ConnectGroup, on_delete=models.CASCADE)
     is_leader = models.BooleanField(default=False)
     date_joined = models.DateField(auto_now_add=True)
+
+class JoinRequest(models.Model):
+    STATUS_PENDING = 'pending'
+    STATUS_APPROVED = 'approved'
+    STATUS_REJECTED = 'rejected'
+
+    STATUS_CHOICES = [
+        (STATUS_PENDING, 'Pending'),
+        (STATUS_APPROVED, 'Approved'),
+        (STATUS_REJECTED, 'Rejected'),
+    ]
+
+    connect_group = models.ForeignKey(
+        ConnectGroup, 
+        on_delete=models.CASCADE,
+        related_name='join_requests'
+    )
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='join_requests'
+    )
+
+    status=models.CharField(
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default=STATUS_PENDING,
+    )
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['connect_group', 'user'],
+                condition=models.Q(status='pending'),
+                name='unique_pending_request_per_user_group'
+            )
+        ]
+    
+    def __str__(self):
+        return f"{self.user} → {self.connect_group} ({self.status})"
+
+
+

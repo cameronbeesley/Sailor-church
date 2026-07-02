@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser, ConnectGroup, Membership
+from .models import CustomUser, ConnectGroup, Membership, JoinRequest
 
 # Register your models here.
 class CustomUserAdmin(UserAdmin):
@@ -42,3 +42,7 @@ class ConnectGroupAdmin(admin.ModelAdmin):
 class MembershipAdmin(admin.ModelAdmin):
     list_display = ('user', 'connect_group', 'is_leader', 'date_joined')
     list_filter = ('is_leader', 'connect_group')
+
+@admin.register(JoinRequest)
+class JoinRequestAdmin(admin.ModelAdmin):
+    list_display = ('user', 'connect_group', 'status', 'created_at', 'updated_at')
